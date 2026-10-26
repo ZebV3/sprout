@@ -7,3 +7,20 @@ summary: How folders in the app directory become URLs.
 # File-based Routing
 
 Every folder in `app/` with a `page.tsx` becomes a route.
+
+## How routes are made
+
+Every folder in `app/` with a `page.tsx` becomes a URL.
+
+<Callout>A folder without a `page.tsx` is not a public route.</Callout>
+
+```tsx
+// src/app/about/page.tsx → /about
+export default function About() {
+  return <h1>About</h1>;
+}
+```
+
+- `app/page.tsx` → `/`
+- `app/seeds/page.tsx` → `/seeds`
+- `app/seeds/[slug]/page.tsx` → `/seeds/anything`
