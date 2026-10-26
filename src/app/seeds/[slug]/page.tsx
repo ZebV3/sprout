@@ -1,6 +1,8 @@
+import { getSeed, getSeedSlugs } from '@/lib/seeds';
+import { notFound } from 'next/navigation';
+
 export async function generateStaticParams() {
-  // Temporary: replaced by real data in Step 3
-  return [{ slug: '01-routing' }];
+  return getSeedSlugs().map((slug) => ({ slug }));
 }
 
 export default async function SeedPage({
@@ -9,5 +11,14 @@ export default async function SeedPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  return <h1>Seed: {slug}</h1>;
+  const seed = getSeed(slug);
+  if (!seed) notFound();
+
+  return (
+    <main className="mx-auto max-w-3xl p-6">
+      <p className="text-sm opacity-70">{seed.meta.level}</p>
+      <h1 className="text-3xl font-bold">{seed.meta.title}</h1>
+      <p>{seed.meta.summary}</p>
+    </main>
+  );
 }
