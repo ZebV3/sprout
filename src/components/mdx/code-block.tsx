@@ -1,3 +1,5 @@
+'use cache';
+
 import { codeToHtml } from 'shiki';
 
 export async function CodeBlock({
