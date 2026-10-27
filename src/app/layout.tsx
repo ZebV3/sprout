@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
+import { Nav } from '@/components/layout/nav';
+import { Footer } from '@/components/layout/footer';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -13,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Sprout',
-  description: 'Learning tool for NextJS',
+  title: { default: 'Sprout', template: '%s | Sprout' },
+  description: 'Learn Next.js and React by exploring live, runnable demos',
 };
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {
@@ -23,7 +25,13 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col">{children}</body>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} flex min-h-screen flex-col antialiased`}
+      >
+        <Nav />
+        <div className="flex-1">{children}</div>
+        <Footer />
+      </body>
     </html>
   );
 }
