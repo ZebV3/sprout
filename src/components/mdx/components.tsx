@@ -1,4 +1,6 @@
-import { ReactNode } from 'react';
+import { ReactElement, ReactNode } from 'react';
+import { CodeBlock } from './code-block';
+import { Demo } from '@/components/demo/demo';
 
 function Callout({ children }: { children: ReactNode }) {
   return (
@@ -8,6 +10,18 @@ function Callout({ children }: { children: ReactNode }) {
   );
 }
 
+function Pre({ children }: { children?: ReactNode }) {
+  const code = children as ReactElement<{
+    className?: string;
+    children?: string;
+  }>;
+  const lang = code.props.className?.replace('language-', '') || 'text';
+
+  return <CodeBlock code={String(code.props.children).trimEnd()} lang={lang} />;
+}
+
 export const mdxComponents = {
   Callout,
+  Demo,
+  pre: Pre,
 };
