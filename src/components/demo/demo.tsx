@@ -14,15 +14,19 @@ export async function Demo({ name, title }: { name: string; title?: string }) {
   );
 
   return (
-    <section>
-      {title && <h3>{title}</h3>}
-      <div>
+    <section className="not-prose my-6 rounded-xl border p-4">
+      {title && <h3 className="mb-3 font-semibold">{title}</h3>}
+      <div className="grid gap-4 md:grid-cols-2">
         <div>
-          <p>Preview</p>
+          <p className="mb-2 text-xs tracking-wide uppercase opacity-60">
+            Preview
+          </p>
           <Component />
         </div>
-        <div>
-          <p>Source</p>
+        <div className="min-w-0">
+          <p className="mb-2 text-xs tracking-wide uppercase opacity-60">
+            Source
+          </p>
           <CodeBlock code={source.trimEnd()} />
         </div>
       </div>
