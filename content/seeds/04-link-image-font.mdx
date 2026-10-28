@@ -1,0 +1,43 @@
+---
+title: Link, Image and Font
+level: Sprout
+summary: The three built-in components that make navigation, images and fonts fast by default.
+---
+
+## The idea
+
+Next.js ships components that handle common performance work for you.
+
+```tsx
+import Link from 'next/link';
+import Image from 'next/image';
+import { Inter } from 'next/font/google';
+
+const inter = Inter({ subsets: ['latin'] });
+
+export default function Example() {
+  return (
+    <main className={inter.className}>
+      <Link href="/seeds">Seeds</Link>
+      <Image src="/hero.png" alt="Sprout hero" width={800} height={400} priority />
+    </main>
+  );
+}
+```
+
+## Try it
+
+Toggle the props and watch the generated JSX change.
+
+<Demo name="04-link-image-font/link-playground" title="Link props" />
+
+## Key points
+
+- `Link` does client-side navigation and prefetches pages that are visible in the viewport.
+- `Image` resizes, lazy-loads, and prevents layout shift. Always give `width` and `height`, or use `fill`.
+- Use `priority` only for the main image visible on first load.
+- `next/font` downloads fonts at build time and serves them from your own domain, with no layout shift.
+
+## Seedling task
+
+Add a hero image to the home page with `next/image`, with a meaningful `alt`, and check in DevTools that it is served as WebP or AVIF.
