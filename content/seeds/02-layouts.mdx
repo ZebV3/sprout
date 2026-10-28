@@ -1,7 +1,44 @@
 ---
 title: Layouts
 level: Sprout
-summary: Shared UI that wraps pages and persists across navigation.
+summary: Shared UI that wraps pages and stays mounted while you navigate.
 ---
 
-# Layouts
+## The idea
+
+A `layout.tsx` wraps every page below it. When you move between pages that share a layout, the layout is not remounted, so its state survives.
+
+```tsx
+// src/app/dashboard/layout.tsx
+export default function DashboardLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="flex">
+      <aside>Sidebar</aside>
+      <section>{children}</section>
+    </div>
+  );
+}
+```
+
+## Try it
+
+Type something, then switch pages. Then tick the checkbox and try again.
+
+<Demo name="02-layouts/layout-persistence" title="Layout vs template" />
+
+## Key points
+
+- Layouts nest: the root layout wraps the dashboard layout, which wraps the page.
+- The root layout must contain `<html>` and `<body>`.
+- Use `template.tsx` when you want a fresh instance on every navigation.
+- Layouts cannot read the current pathname or search params directly.
+
+<Callout>Layouts are for UI that stays. Templates are for UI that resets.</Callout>
+
+## Seedling task
+
+Create `app/seeds/layout.tsx` that adds a sidebar listing all seeds around every seed page.

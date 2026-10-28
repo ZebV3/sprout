@@ -10,8 +10,8 @@ export function Footer() {
           rel="noopener noreferrer"
         >
           Contribute a seed
-        </a> */}
-        .
+        </a> 
+        .*/}
       </div>
     </footer>
   );
